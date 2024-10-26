@@ -71,8 +71,8 @@ namespace UI
             _enemyCounterView.ShowAmountEnemy(_gameSettings.AmountEnemy);
             _gameOverPanel.Initialize(_unSubscribeAction, _createControllers, _initializeGameAction,
                 _restartButtonGameOverPanel, _onRestartButtonPressed);
-            _winPanel.Initialize(_unSubscribeAction, _createControllers, _initializeGameAction, _restartButtonWinPanel,
-                _onRestartButtonPressed);
+            _winPanel.Initialize(_unSubscribeAction, _createControllers, _initializeGameAction,
+                _restartButtonWinPanel, _onRestartButtonPressed);
         }
 
         public void ShowWinPanel()
@@ -94,6 +94,7 @@ namespace UI
         {
             _enemyHealthBarView.ShowHealth(enemy, enemyHealth);
         }
+
         public void ShowAmountEnemy(int amountEnemy)
         {
             _enemyCounterView.ShowAmountEnemy(amountEnemy);

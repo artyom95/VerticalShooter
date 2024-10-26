@@ -52,6 +52,7 @@ namespace Enemy
         {
             KillAllEnemies?.Invoke();
             _enemyCounter.KillAllEnemies();
+            UnSubscribe();
         }
 
         public void UnSubscribe()

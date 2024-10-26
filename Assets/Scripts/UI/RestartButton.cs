@@ -20,6 +20,7 @@ namespace UI
             Action initializeGameAction,
             Action onRestartButtonPressed)
         {
+            UnSubscribe();
             _onRestartButtonPressed = onRestartButtonPressed;
             _createControllers = createControllers;
             _initializeGameAction = initializeGameAction;
@@ -36,11 +37,14 @@ namespace UI
         private void UnSubscribe()
         {
             _restartButton.onClick.RemoveListener(OnClick);
+            _onRestartButtonPressed = null;
+            _createControllers = null;
+            _initializeGameAction = null;
+            _unSubscribeAction = null;
         }
 
         private void OnClick()
         {
-            UnSubscribe();
             _unSubscribeAction?.Invoke();
             _onRestartButtonPressed?.Invoke();
             _createControllers?.Invoke();

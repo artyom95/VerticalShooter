@@ -4,13 +4,11 @@ using Health.PlayerHealth;
 using Player;
 using Settings;
 using UI;
-using UI.Health;
 using UI.StartScreen;
 using UnityEngine;
 
 /// <summary>
-/// finish healthBar feature with enemies at first
-/// create healthBar fabric(creator)
+/// first of all need fix all bugs
 /// 
 /// </summary>
 public class GameManager : MonoBehaviour
@@ -96,17 +94,28 @@ public class GameManager : MonoBehaviour
 
     private void OnAmountEnemyEndedAction()
     {
-        _uiController.ShowWinPanel();
-        _uiController.DestroyPlayerHealthBar();
-        _playerController.KillPlayer();
+        HandleGameEnd(true);
     }
 
     private void OnPlayerHealthEnded()
     {
-        _uiController.ShowGameOverPanel();
-        _uiController.DestroyPlayerHealthBar();
+        HandleGameEnd(false);
+    }
+
+    private void HandleGameEnd(bool isWin)
+    {
         _enemyController.KillAliveEnemies();
+        _uiController.DestroyPlayerHealthBar();
         _playerController.KillPlayer();
+
+        if (isWin)
+        {
+            _uiController.ShowWinPanel();
+        }
+        else
+        {
+            _uiController.ShowGameOverPanel();
+        }
     }
 
     private void OnDestroy()
@@ -127,7 +136,6 @@ public class GameManager : MonoBehaviour
         _enemyController.EnemyDied -= _uiController.DestroyEnemyHealthBar;
         _enemyController.KillAllEnemies -= _uiController.DestroyAliveEnemiesHealthBar;
         _enemyController.HealthChangedAction -= _uiController.ShowEnemyHealth;
-
         _playerHealthController.PlayerChangedEvent -= _uiController.ShowPlayerHealth;
         _playerController.PlayerSpawned -= _uiController.OnPlayerSpawned;
     }

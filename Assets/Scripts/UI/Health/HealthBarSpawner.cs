@@ -6,7 +6,7 @@ namespace UI.Health
     {
         public HealthBar SpawnHealthBar(HealthBar healthBarPrefab, Transform parent)
         {
-            var healthBar = Object.Instantiate(healthBarPrefab, parent.position, Quaternion.identity, parent);
+            var healthBar = Object.Instantiate(healthBarPrefab, parent);
             return healthBar;
         }
     }

@@ -64,7 +64,7 @@ namespace UI.Health
             _copyEnemyHealthBarDictionary = _enemyHealthBarDictionary;
             foreach (var keyValuePair in _copyEnemyHealthBarDictionary)
             {
-                _enemyHealthBarDictionary.Remove(keyValuePair.Key, out var healthBar);
+                var healthBar = _copyEnemyHealthBarDictionary[keyValuePair.Key];
                 healthBar.Destroy();
             }
             _enemyHealthBarDictionary.Clear();
