@@ -21,7 +21,7 @@ namespace Enemy
 
         //private EnemyMover _enemyMover;
         private readonly Enemy _enemyPrefab;
-        private readonly EnemySpawner _enemySpawner;
+        private readonly EnemyFactory _enemyFactory;
         private readonly List<Transform> _spawnPoints;
         private readonly EnemySpawnTimer _enemySpawnTimer;
         private readonly EnemyCounter _enemyCounter;
@@ -35,7 +35,7 @@ namespace Enemy
             _spawnPoints = spawnPoints;
             _enemyPrefab = enemyPrefab;
             _gameSettings = gameSettings;
-            _enemySpawner = new EnemySpawner();
+            _enemyFactory = new EnemyFactory();
             _enemyCounter = new EnemyCounter(_gameSettings,
                 OnAmountEnemyChanged, OnAmountEnemyEnded,
                 OnAliveEnemyEnded);
@@ -76,7 +76,8 @@ namespace Enemy
         private void CreateEnemy()
         {
             var spawnPoint = GetSpawnPoint();
-            _enemy = _enemySpawner.SpawnEnemy(_enemyPrefab, spawnPoint);
+            _enemy = _enemyFactory.Create(_enemyPrefab, spawnPoint);
+            
             _enemy.Initialize(_gameSettings, _enemyDestroyed, 
                 _enemyCounter.DeleteEnemy, EnemyDied, OnHealthChanged);
             _enemyCounter.AddEnemy(_enemy);

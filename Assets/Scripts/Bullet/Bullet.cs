@@ -1,5 +1,3 @@
-using System;
-using DG.Tweening;
 using Settings;
 using UnityEngine;
 
@@ -7,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
+    
     private float _bulletSpeed;
 
     public void Initialize(GameSettings gameSettings)
@@ -20,8 +19,7 @@ public class Bullet : MonoBehaviour
         var enemyPosition = new Vector2(targetPosition.x, targetPosition.y);
         var bulletPosition = new Vector2(_rigidbody.position.x, _rigidbody.position.y);
         var direction = (enemyPosition -  bulletPosition).normalized;
-
-        // Двигаем пулю
+        
         _rigidbody.AddForce(direction * _bulletSpeed, ForceMode.Impulse);
     }
 }

@@ -12,7 +12,7 @@ namespace Player
     {
         private Bullet _bullet;
         private Bullet _bulletPrefab;
-        private BulletSpawner _bulletSpawner;
+        private BulletFactory _bulletFactory;
         private Player _player;
         private GameSettings _gameSettings;
         private float _shootTimer;
@@ -23,7 +23,7 @@ namespace Player
             _gameSettings = gameSettings;
             _player = player;
             _bulletPrefab = bulletPrefab;
-            _bulletSpawner = new BulletSpawner();
+            _bulletFactory = new BulletFactory();
         }
 
         public void Shoot(List<Enemy.Enemy> enemies)
@@ -62,7 +62,7 @@ namespace Player
 
         private Bullet CreateBullet()
         {
-            var bullet = _bulletSpawner.CreateBullet(_bulletPrefab, _player.transform);
+            var bullet = _bulletFactory.Create(_bulletPrefab, _player.transform);
             bullet.Initialize(_gameSettings);
             return bullet;
         }

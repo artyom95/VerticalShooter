@@ -39,7 +39,7 @@ namespace Player
         public void Initialize()
         {
             CreatePlayer(_playerPrefab, _playerSpawnTransform);
-            _player.Initialize(_enemyDetector);
+            _player.Initialize(_enemyDetector, _gameSettings);
             _inputHandler.Initialize();
             _playerMover.Initialize(_player, _gameSettings);
             _attackExecutor.Initialize(_bulletPrefab, _player, _gameSettings);
@@ -75,8 +75,8 @@ namespace Player
 
         private void CreatePlayer(Player playerPrefab, Transform playerSpawnTransform)
         {
-            var playerSpawner = new PlayerSpawner();
-            _player = playerSpawner.SpawnPlayer(playerPrefab, playerSpawnTransform);
+            var playerSpawner = new PlayerFactory();
+            _player = playerSpawner.Create(playerPrefab, playerSpawnTransform);
             PlayerSpawned?.Invoke(_player);
         }
 

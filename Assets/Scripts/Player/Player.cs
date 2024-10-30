@@ -1,4 +1,4 @@
-using System;
+using Settings;
 using UnityEngine;
 
 namespace Player
@@ -7,20 +7,20 @@ namespace Player
     public class Player : MonoBehaviour
     {
         public Rigidbody RigidBody { get; private set; }
-
         private EnemyDetector _enemyDetector;
 
-        // should delete it in the future;
-        private float _radiusDetection = 4f;
+        private float _radiusDetection;
 
         public void Awake()
         {
             RigidBody = gameObject.GetComponent<Rigidbody>();
         }
 
-        public void Initialize(EnemyDetector enemyDetector)
+        public void Initialize(EnemyDetector enemyDetector,
+            GameSettings gameSettings)
         {
             _enemyDetector = enemyDetector;
+            _radiusDetection = gameSettings.RadiusDetection;
         }
 
         public void Update()

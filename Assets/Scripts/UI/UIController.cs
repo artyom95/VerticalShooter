@@ -26,7 +26,7 @@ namespace UI
         private readonly Action _onRestartButtonPressed;
         private readonly HealthBar _healthBarPrefab;
         private readonly Transform _healthBarParent;
-        private readonly HealthBarSpawner _healthBarSpawner;
+        private readonly HealthBarFactory _healthBarFactory;
 
 
         public UIController(StartScreenView startScreenView,
@@ -59,15 +59,15 @@ namespace UI
             _gameOverPanel = gameOverPanel;
             _startScreenController = new StartScreenController(startScreenView,
                 startButton, gameSettings, _initializeGameAction);
-            _healthBarSpawner = new HealthBarSpawner();
+            _healthBarFactory = new HealthBarFactory();
             _playerHealthBarView = new PlayerHealthBarView();
             _enemyHealthBarView = new EnemyHealthBarView();
         }
 
         public void Initialize()
         {
-            _playerHealthBarView.Initialize(_gameSettings, _healthBarPrefab, _healthBarSpawner);
-            _enemyHealthBarView.Initialize(_gameSettings, _healthBarPrefab, _healthBarSpawner);
+            _playerHealthBarView.Initialize(_gameSettings, _healthBarPrefab, _healthBarFactory);
+            _enemyHealthBarView.Initialize(_gameSettings, _healthBarPrefab, _healthBarFactory);
             _enemyCounterView.ShowAmountEnemy(_gameSettings.AmountEnemy);
             _gameOverPanel.Initialize(_unSubscribeAction, _createControllers, _initializeGameAction,
                 _restartButtonGameOverPanel, _onRestartButtonPressed);

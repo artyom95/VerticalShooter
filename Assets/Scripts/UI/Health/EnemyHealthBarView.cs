@@ -13,20 +13,20 @@ namespace UI.Health
         private HealthBar _healthBar;
         private float _maxHealth;
         private HealthBar _healthBarPrefab;
-        private HealthBarSpawner _healthBarSpawner;
+        private HealthBarFactory _healthBarFactory;
        
         public void Initialize(GameSettings gameSettings,
             HealthBar healthBarPrefab,
-            HealthBarSpawner healthBarSpawner)
+            HealthBarFactory healthBarFactory)
         {
-            _healthBarSpawner = healthBarSpawner;
+            _healthBarFactory = healthBarFactory;
             _healthBarPrefab = healthBarPrefab;
             _maxHealth = gameSettings.AmountEnemyHealth;
         }
 
         public void CreateHealthBar(Enemy.Enemy enemy, Transform parent)
         {
-            _healthBar = _healthBarSpawner.SpawnHealthBar(_healthBarPrefab, parent);
+            _healthBar = _healthBarFactory.Create(_healthBarPrefab, parent);
             _healthBar.Initialize(_maxHealth);
             
             _enemyHealthBarDictionary.Add(enemy, _healthBar);

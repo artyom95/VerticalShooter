@@ -10,15 +10,18 @@ namespace Enemy
     public class Enemy : MonoBehaviour, IMovable
 
     {
+        public bool IsAlive { get; private set; }
+        public float Health;
+
         [SerializeField] private Rigidbody _rigidbody;
+
+        private Action<Enemy> _enemyDestroyedAction;
+        private Action<Enemy> _deleteEnemyFromList;
+        private Action<Enemy> _enemyDeathAction;
+
         private EnemyHealthController _enemyHealthController;
         private float _enemySpeed;
         private bool _startMoving;
-        private Action<Enemy> _enemyDestroyedAction;
-        public bool IsAlive { get; private set; }
-        public float Health;
-        private Action<Enemy> _deleteEnemyFromList;
-        private Action<Enemy> _enemyDeathAction;
 
         public void Start()
         {
@@ -26,8 +29,10 @@ namespace Enemy
         }
 
         public void Initialize(GameSettings gameSettings, Action<Enemy> enemyDestroyedAction,
-            Action<Enemy> deleteEnemyFromList, Action<Enemy> enemyDeathAction, Action<Enemy, float> onHealthChangedAction)
+            Action<Enemy> deleteEnemyFromList, Action<Enemy> enemyDeathAction,
+            Action<Enemy, float> onHealthChangedAction)
         {
+            gameObject.transform.Rotate(0, 0, 180);
             _enemyDeathAction = enemyDeathAction;
             _deleteEnemyFromList = deleteEnemyFromList;
             _enemyDestroyedAction = enemyDestroyedAction;

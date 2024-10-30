@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Settings
 {
+    [Serializable]
     [CreateAssetMenu(fileName = "GameSettings", menuName = "ScriptableObjects/GameSettings", order = 1)]
     public class GameSettings : ScriptableObject
 
@@ -15,6 +17,7 @@ namespace Settings
         [field: SerializeField] public float PlayerSpeed;
         [field: SerializeField] public float BulletSpeed;
         [field: SerializeField] public float EnemySpeed;
+        [field: SerializeField] public float RadiusDetection;
 
         [field: SerializeField] public float SpawnTimer;
         [field: SerializeField] public int AmountEnemy;
