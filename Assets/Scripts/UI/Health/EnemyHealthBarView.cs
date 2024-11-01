@@ -21,14 +21,13 @@ namespace UI.Health
         {
             _healthBarFactory = healthBarFactory;
             _healthBarPrefab = healthBarPrefab;
-            _maxHealth = gameSettings.AmountEnemyHealth;
+            _maxHealth = gameSettings.EnemyHealth;
         }
 
         public void CreateHealthBar(Enemy.Enemy enemy, Transform parent)
         {
             _healthBar = _healthBarFactory.Create(_healthBarPrefab, parent);
             _healthBar.Initialize(_maxHealth);
-            
             _enemyHealthBarDictionary.Add(enemy, _healthBar);
         }
 

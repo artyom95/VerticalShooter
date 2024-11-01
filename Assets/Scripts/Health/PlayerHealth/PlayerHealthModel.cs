@@ -1,10 +1,12 @@
+using Interface;
+
 namespace Health.PlayerHealth
 {
-    public class PlayerHealthModel
+    public class PlayerHealthModel: IHealthModel
     {
         private float _health;
 
-        public void Initialize(float health)
+        public PlayerHealthModel(float health)
         {
             _health = health;
         }

@@ -8,7 +8,9 @@ namespace Player
 
     {
         public event Action<Player> PlayerSpawned;
+        
         private Player _player;
+        
         private readonly PlayerMover _playerMover;
         private readonly EnemyDetector _enemyDetector;
         private readonly InputHandler _inputHandler;
@@ -22,8 +24,7 @@ namespace Player
         public PlayerController(InputHandler inputHandler,
             Player playerPrefab, Transform playerSpawnTransform,
             PlayerMover playerMover, GameSettings gameSettings,
-            LayerMask enemyLayer, Bullet bulletPrefab,
-            AttackExecutor attackExecutor)
+            Bullet bulletPrefab, AttackExecutor attackExecutor)
         {
             _playerSpawnTransform = playerSpawnTransform;
             _playerPrefab = playerPrefab;
@@ -32,7 +33,7 @@ namespace Player
             _gameSettings = gameSettings;
             _inputHandler = inputHandler;
             _playerMover = playerMover;
-            _enemyDetector = new EnemyDetector(enemyLayer);
+            _enemyDetector = new EnemyDetector(_gameSettings);
         }
 
 

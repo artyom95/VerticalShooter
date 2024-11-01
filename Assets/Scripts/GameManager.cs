@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform _playerSpawnTransform;
     [SerializeField] private InputHandler _inputHandler;
     [SerializeField] private PlayerMover _playerMover;
-    [SerializeField] private LayerMask _enemyLayer;
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private AttackExecutor _attackExecutor;
     [SerializeField] private Enemy.Enemy _enemyPrefab;
@@ -62,8 +61,8 @@ public class GameManager : MonoBehaviour
 
         _playerController = new PlayerController(_inputHandler, _playerPrefab,
             _playerSpawnTransform, _playerMover,
-            _gameSettings, _enemyLayer,
-            _bulletPrefab, _attackExecutor);
+            _gameSettings, _bulletPrefab, 
+            _attackExecutor);
 
         _enemyController = new EnemyController(_gameSettings, _enemyPrefab,
             _enemySpawnPoints, _enemySpawnTimer);
@@ -74,7 +73,6 @@ public class GameManager : MonoBehaviour
         Subscribe();
         _enemyController.Initialize(_playerController.OnEnemyPrefabDestroyed);
         _uiController.Initialize();
-        _playerHealthController.Initialize();
         _playerController.Initialize();
     }
 
@@ -144,11 +142,8 @@ public class GameManager : MonoBehaviour
     private void OnRestartButtonPressed()
     {
         _uiController = null;
-
         _playerHealthController = null;
-
         _playerController = null;
-
         _enemyController = null;
     }
 }

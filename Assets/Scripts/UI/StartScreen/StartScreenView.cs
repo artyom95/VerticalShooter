@@ -15,7 +15,6 @@ namespace UI.StartScreen
         private float _scaleY;
         private float _durationChangeScale;
 
-
         public void Initialize(GameSettings gameSettings)
         {
             _scaleX = gameSettings.TimerSettings.ScaleX;

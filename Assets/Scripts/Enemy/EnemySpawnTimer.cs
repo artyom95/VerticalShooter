@@ -1,7 +1,6 @@
 using System;
 using Settings;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Enemy
 {

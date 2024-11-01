@@ -1,6 +1,5 @@
 using Interface;
 using Settings;
-using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -13,7 +12,6 @@ namespace Player
         private Vector2 _direction;
         private float _moveTimer;
         private float _moveDuration;
-      
 
         public void Initialize(Player player, GameSettings gameSettings)
         {
@@ -26,32 +24,26 @@ namespace Player
         {
             if (!_isMoving)
             {
-                _isMoving = true; // Устанавливаем флаг, что объект начал двигаться
+                _isMoving = true;
                 _direction = direction.normalized;
 
-                // Применяем силу для старта
                 _player.RigidBody.AddForce(_direction * _speed, ForceMode.Impulse);
 
-                _moveTimer = 0; // Сбрасываем таймер
+                _moveTimer = 0;
             }
         }
 
         public void FixedUpdate()
         {
-            // Поддерживаем эффект только до истечения времени
-
             if (_isMoving)
             {
-                _moveTimer += Time.fixedDeltaTime; // Увеличиваем таймер
+                _moveTimer += Time.fixedDeltaTime;
 
-                // Проверяем, превышает ли таймер максимальную длительность движения
                 if (_moveTimer >= _moveDuration)
                 {
-                    _isMoving = false; // Остановка движения
-                    _player.RigidBody.velocity = Vector2.zero; // Остановить объект
+                    _isMoving = false;
+                    _player.RigidBody.velocity = Vector2.zero;
                 }
-
-                // Здесь можно дополнительно обрабатывать поведение объекта, пока он движется.
             }
         }
     }

@@ -11,7 +11,6 @@ namespace Enemy
 
     {
         public bool IsAlive { get; private set; }
-        public float Health;
 
         [SerializeField] private Rigidbody _rigidbody;
 
@@ -39,7 +38,6 @@ namespace Enemy
             _enemyHealthController = new EnemyHealthController();
             _enemySpeed = gameSettings.EnemySpeed;
             _enemyHealthController.Initialize(this, gameSettings, KillEnemy, onHealthChangedAction);
-            Health = _enemyHealthController.AmountHealth;
         }
 
         public void OnTriggerEnter(Collider otherCollider)

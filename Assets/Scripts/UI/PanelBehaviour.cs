@@ -1,16 +1,14 @@
 using System;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI
 {
     public class PanelBehaviour : MonoBehaviour
-
     {
         private RestartButton _restartButton;
 
         public void Initialize(Action unSubscribeAction,
-            Action createControllers, 
+            Action createControllers,
             Action initializeGameAction,
             RestartButton restartButton,
             Action onRestartButtonPressed)

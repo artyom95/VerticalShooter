@@ -15,18 +15,16 @@ namespace Enemy
         public event Action<Enemy> EnemySpawned;
         public event Action<Enemy> EnemyDied;
         public event Action<Enemy,float> HealthChangedAction;
+        
         private readonly GameSettings _gameSettings;
-
-        private Enemy _enemy;
-
-        //private EnemyMover _enemyMover;
         private readonly Enemy _enemyPrefab;
         private readonly EnemyFactory _enemyFactory;
         private readonly List<Transform> _spawnPoints;
         private readonly EnemySpawnTimer _enemySpawnTimer;
         private readonly EnemyCounter _enemyCounter;
         private Action<Enemy> _enemyDestroyed;
-
+        
+        private Enemy _enemy;
 
         public EnemyController(GameSettings gameSettings, Enemy enemyPrefab,
             List<Transform> spawnPoints, EnemySpawnTimer enemySpawnTimer)

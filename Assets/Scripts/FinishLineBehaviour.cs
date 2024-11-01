@@ -18,6 +18,7 @@ public class FinishLineBehaviour: MonoBehaviour
                     EnemyDestroyed?.Invoke(enemy);
                     enemy.KillEnemy();
                     EnemyDestroyedAction?.Invoke();
+                    Debug.Log("EnemyDestroyAction was invoke");
                 }
         }
 }

@@ -28,7 +28,6 @@ namespace UI
             _restartButton.onClick.AddListener(OnClick);
         }
 
-
         private void OnDestroy()
         {
             UnSubscribe();

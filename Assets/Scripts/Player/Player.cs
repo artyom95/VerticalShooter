@@ -38,9 +38,11 @@ namespace Player
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// only for Debug Session
+        /// </summary>
         private void OnDrawGizmos()
         {
-            // Отображение радиуса обнаружения в редакторе
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, _radiusDetection);
         }

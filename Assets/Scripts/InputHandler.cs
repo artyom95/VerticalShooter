@@ -17,10 +17,10 @@ public class InputHandler : MonoBehaviour
         {
             return;
         }
+
         ShouldMovePlayer();
-        
     }
-    
+
     private void ShouldMovePlayer()
     {
         if (Input.GetKey(KeyCode.W))

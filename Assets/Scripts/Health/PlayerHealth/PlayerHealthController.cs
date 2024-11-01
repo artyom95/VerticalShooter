@@ -8,22 +8,18 @@ namespace Health.PlayerHealth
         public event Action PlayerHealthEndedEvent;
         public event Action<float> PlayerChangedEvent;
         private readonly PlayerHealthModel _playerHealthModel;
-        private  float _playerHealth;
+        private float _playerHealth;
 
-        public PlayerHealthController( GameSettings gameSettings)
+        public PlayerHealthController(GameSettings gameSettings)
         {
-            _playerHealthModel = new PlayerHealthModel();
             _playerHealth = gameSettings.PlayerHealth;
+            _playerHealthModel = new PlayerHealthModel(_playerHealth);
         }
-
-        public void Initialize()
-        {
-            _playerHealthModel.Initialize(_playerHealth);
-        }
-
+        
         public void DecreaseHealth()
         {
-            _playerHealth = _playerHealthModel.DecreaseHealth();
+            var health = _playerHealthModel.DecreaseHealth();
+            _playerHealth = health;
             PlayerChangedEvent?.Invoke(_playerHealth);
             CheckPlayerHealth();
         }

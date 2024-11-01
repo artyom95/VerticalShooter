@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Settings;
 using UnityEngine;
 
 namespace Player
@@ -8,23 +9,23 @@ namespace Player
     {
         public event Action<List<Enemy.Enemy>> NearestEnemiesDetectedEvent;
 
-        //   private List<Enemy.Enemy> _enemies;
         private List<Enemy.Enemy> _nearestEnemy;
-        private float _radiusDetection = 4f;
-        private float _nearDistanceToEnemy = 3f;
+        private readonly float _radiusDetection;
+        private readonly float _nearDistanceToEnemy ;
         private Player _player;
-        private LayerMask _enemyLayer;
+        private readonly LayerMask _enemyLayer;
 
-        public EnemyDetector(LayerMask enemyLayer)
+        public EnemyDetector(GameSettings gameSettings)
         {
             _nearestEnemy = new List<Enemy.Enemy>();
-            _enemyLayer = enemyLayer;
+            _enemyLayer = gameSettings.EnemyLayer;
+            _radiusDetection = gameSettings.RadiusDetection;
+            _nearDistanceToEnemy = gameSettings.NearDistanceToEnemy;
         }
 
         public void DetectEnemies(Player player)
         {
-            Debug.Log("DetectEnemies method was invoke");
-
+           
             _player = player;
             var array = Physics.OverlapSphere(
                 new Vector2(_player.transform.position.x, _player.transform.position.y),
@@ -58,8 +59,7 @@ namespace Player
         /// <param name="array"></param>
         private void GetNearestEnemies(Collider[] array)
         {
-            Debug.Log("GetNearestEnemies method was created");
-            
+             
             foreach (var collider2D in array)
             {
                 if (Vector3.Distance(_player.transform.position, collider2D.transform.position) <= _nearDistanceToEnemy)

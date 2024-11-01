@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace UI.Health
 {
-    public class PlayerHealthBarView 
+    public class PlayerHealthBarView
 
     {
         private HealthBar _healthBar;
@@ -11,8 +11,8 @@ namespace UI.Health
         private HealthBar _healthBarPrefab;
         private HealthBarFactory _healthBarFactory;
 
-        public void  Initialize(GameSettings gameSettings,
-            HealthBar healthBarPrefab, 
+        public void Initialize(GameSettings gameSettings,
+            HealthBar healthBarPrefab,
             HealthBarFactory healthBarFactory)
         {
             _healthBarFactory = healthBarFactory;
@@ -22,10 +22,10 @@ namespace UI.Health
 
         public void CreateHealthBar(Transform parent)
         {
-           // _healthBar = _healthBarFactory.SpawnHealthBar(_healthBarPrefab, parent);
-           _healthBar = _healthBarFactory.Create(_healthBarPrefab, parent);
+            _healthBar = _healthBarFactory.Create(_healthBarPrefab, parent);
             _healthBar.Initialize(_maxHealth);
         }
+
         public void ShowHealth(float health)
         {
             _healthBar.SetHealthValue(health);

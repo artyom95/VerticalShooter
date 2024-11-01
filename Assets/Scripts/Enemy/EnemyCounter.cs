@@ -52,7 +52,6 @@ namespace Enemy
                     enemy.Destroy(enemy);
                 }
             }
-            // _enemiesList.Clear();
         }
 
         private void CheckAmountEnemy()

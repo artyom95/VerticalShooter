@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Settings
 {
@@ -18,9 +16,11 @@ namespace Settings
         [field: SerializeField] public float BulletSpeed;
         [field: SerializeField] public float EnemySpeed;
         [field: SerializeField] public float RadiusDetection;
+        [field: SerializeField] public float NearDistanceToEnemy;
 
         [field: SerializeField] public float SpawnTimer;
         [field: SerializeField] public int AmountEnemy;
-        [field: SerializeField] public float AmountEnemyHealth;
+        [field: SerializeField] public float EnemyHealth;
+        [field: SerializeField] public LayerMask EnemyLayer;
     }
 }

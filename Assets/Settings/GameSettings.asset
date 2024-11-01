@@ -13,11 +13,16 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   TimerSettings: {fileID: 11400000, guid: 3c0dae533b6db7e4eaa28486cb4453e3, type: 2}
-  PlayerHealth: 6
+  PlayerHealth: 4
   PlayerMoveDuration: 0.1
   PlayerSpeed: 1
   BulletSpeed: 5
   EnemySpeed: 0.5
+  RadiusDetection: 4
+  NearDistanceToEnemy: 3
   SpawnTimer: 4
   AmountEnemy: 10
-  AmountEnemyHealth: 2
+  EnemyHealth: 2
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 64

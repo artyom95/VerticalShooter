@@ -315,8 +315,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.86, y: 0.29, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5.86, y: 0.1, z: 1}
+  m_Center: {x: 0, y: 0.09, z: 0}
 --- !u!114 &128332243
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,8 +348,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.87, y: 0.3, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 5.86, y: 0.1, z: 1}
+  m_Center: {x: 0, y: -0.09, z: 0}
 --- !u!1 &247188446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2314,9 +2314,6 @@ MonoBehaviour:
   _playerSpawnTransform: {fileID: 2027904891}
   _inputHandler: {fileID: 1618299472}
   _playerMover: {fileID: 1687989541}
-  _enemyLayer:
-    serializedVersion: 2
-    m_Bits: 64
   _bulletPrefab: {fileID: 5775637675712814969, guid: 5c170b9bacd795544af3d470b2723637, type: 3}
   _attackExecutor: {fileID: 1802968126}
   _enemyPrefab: {fileID: 4610247785160126519, guid: 59d4e4d54852bdf41b53d973e9302e53, type: 3}

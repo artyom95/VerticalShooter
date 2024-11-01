@@ -8,6 +8,7 @@ namespace UI.StartScreen
     {
         public event Action<float> SetRemainingTime;
         public event Action StopCountDown;
+
         private float _countdownTime;
         private int _delay;
 
@@ -24,8 +25,8 @@ namespace UI.StartScreen
             while (timeRemaining >= 0)
             {
                 SetRemainingTime?.Invoke(timeRemaining);
-                await UniTask.Delay(_delay); 
-                timeRemaining -= 1; 
+                await UniTask.Delay(_delay);
+                timeRemaining -= 1;
             }
 
             StopCountDown?.Invoke();

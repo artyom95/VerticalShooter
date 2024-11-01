@@ -6,27 +6,27 @@ namespace Health.EnemyHealth
     public class EnemyHealthController
     {
         public float AmountHealth { get; private set; }
-        private Action _healthEndedAction;
 
-        private Action<Enemy.Enemy,float> _onHealthChangedAction;
+        private Action _healthEndedAction;
+        private Action<Enemy.Enemy, float> _onHealthChangedAction;
 
         private Enemy.Enemy _enemy;
-        // public event Action<int> HealthChanged; 
+        private EnemyHealthModel _enemyHealthModel;
 
-        public void Initialize( Enemy.Enemy enemy,GameSettings gameSettings,
+        public void Initialize(Enemy.Enemy enemy, GameSettings gameSettings,
             Action healthEndedAction,
             Action<Enemy.Enemy, float> onHealthChangedAction)
         {
+            _enemyHealthModel = new EnemyHealthModel(gameSettings.EnemyHealth);
             _enemy = enemy;
             _onHealthChangedAction = onHealthChangedAction;
-            AmountHealth = gameSettings.AmountEnemyHealth;
             _healthEndedAction = healthEndedAction;
         }
 
         public void DecreaseHealth()
         {
-            AmountHealth -= 1;
-           _onHealthChangedAction?.Invoke(_enemy, AmountHealth);
+            AmountHealth = _enemyHealthModel.DecreaseHealth();
+            _onHealthChangedAction?.Invoke(_enemy, AmountHealth);
             CheckHealth();
         }
 

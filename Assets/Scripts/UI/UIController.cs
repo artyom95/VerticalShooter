@@ -1,9 +1,7 @@
 using System;
-using Health.PlayerHealth;
 using Settings;
 using UI.Health;
 using UI.StartScreen;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace UI
@@ -27,7 +25,6 @@ namespace UI
         private readonly HealthBar _healthBarPrefab;
         private readonly Transform _healthBarParent;
         private readonly HealthBarFactory _healthBarFactory;
-
 
         public UIController(StartScreenView startScreenView,
             StartButton startButton,
