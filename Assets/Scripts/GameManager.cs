@@ -8,10 +8,6 @@ using UI.Health;
 using UI.StartScreen;
 using UnityEngine;
 
-/// <summary>
-/// first of all need fix all bugs
-/// 
-/// </summary>
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private StartScreenView _startScreenView;
@@ -32,7 +28,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RestartButton _restartButtonWinPanel;
     [SerializeField] private HealthBar _healthBarPrefab;
     [SerializeField] private Transform _healthBardParent;
-
     [SerializeField] private PanelBehaviour _winPanel;
     [SerializeField] private PanelBehaviour _gameOverPanel;
 
@@ -40,6 +35,7 @@ public class GameManager : MonoBehaviour
     private PlayerController _playerController;
     private EnemyController _enemyController;
     private UIController _uiController;
+    private BulletController _bulletController;
 
     public void Awake()
     {
@@ -61,11 +57,12 @@ public class GameManager : MonoBehaviour
 
         _playerController = new PlayerController(_inputHandler, _playerPrefab,
             _playerSpawnTransform, _playerMover,
-            _gameSettings, _bulletPrefab, 
+            _gameSettings, _bulletPrefab,
             _attackExecutor);
 
         _enemyController = new EnemyController(_gameSettings, _enemyPrefab,
             _enemySpawnPoints, _enemySpawnTimer);
+        _bulletController = new BulletController(_bulletPrefab);
     }
 
     private void InitializeGame()
@@ -73,7 +70,7 @@ public class GameManager : MonoBehaviour
         Subscribe();
         _enemyController.Initialize(_playerController.OnEnemyPrefabDestroyed);
         _uiController.Initialize();
-        _playerController.Initialize();
+        _playerController.Initialize(_bulletController);
     }
 
     private void Subscribe()
