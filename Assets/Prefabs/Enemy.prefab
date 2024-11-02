@@ -148,4 +148,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2855277204753553503}
-  Health: 0
+  _spriteRenderer: {fileID: 8313428950768825931}

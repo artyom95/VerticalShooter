@@ -10,6 +10,7 @@ namespace Player
         private EnemyDetector _enemyDetector;
 
         private float _radiusDetection;
+        private float _nearRadiusDetection;
 
         public void Awake()
         {
@@ -21,6 +22,7 @@ namespace Player
         {
             _enemyDetector = enemyDetector;
             _radiusDetection = gameSettings.RadiusDetection;
+            _nearRadiusDetection = gameSettings.NearDistanceToEnemy;
         }
 
         public void Update()
@@ -45,6 +47,9 @@ namespace Player
         {
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, _radiusDetection);
+            
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, _nearRadiusDetection);
         }
     }
 }

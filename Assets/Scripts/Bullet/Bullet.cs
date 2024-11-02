@@ -1,25 +1,36 @@
+using System;
 using Settings;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
+    public event Action<Bullet> ReleaseBulletAction;
+
     [SerializeField] private Rigidbody _rigidbody;
-    
+
     private float _bulletSpeed;
+
+    /// <summary>
+    /// Debug Session
+    /// </summary>
+    private Enemy.Enemy _enemy;
 
     public void Initialize(GameSettings gameSettings)
     {
         _bulletSpeed = gameSettings.BulletSpeed;
     }
 
-    public void Move(Transform movePosition)
+    public void Move(Enemy.Enemy targetEnemy)
     {
-        var targetPosition = movePosition.position;
-        var enemyPosition = new Vector2(targetPosition.x, targetPosition.y);
-        var bulletPosition = new Vector2(_rigidbody.position.x, _rigidbody.position.y);
-        var direction = (enemyPosition -  bulletPosition).normalized;
-        
-        _rigidbody.AddForce(direction * _bulletSpeed, ForceMode.Impulse);
+        _enemy = targetEnemy;
+        var direction = (targetEnemy.transform.position - transform.position).normalized;
+        _rigidbody.velocity = direction * _bulletSpeed;
+    }
+
+    public void ReleaseBullet()
+    {
+        ReleaseBulletAction?.Invoke(this);
+        _enemy = null;
     }
 }

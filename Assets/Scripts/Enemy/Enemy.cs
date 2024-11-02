@@ -13,7 +13,8 @@ namespace Enemy
         public bool IsAlive { get; private set; }
 
         [SerializeField] private Rigidbody _rigidbody;
-
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        
         private Action<Enemy> _enemyDestroyedAction;
         private Action<Enemy> _deleteEnemyFromList;
         private Action<Enemy> _enemyDeathAction;
@@ -44,7 +45,7 @@ namespace Enemy
         {
             if (otherCollider.TryGetComponent<Bullet>(out var bullet))
             {
-                Destroy(bullet.gameObject);
+                bullet.ReleaseBullet();
                 _enemyHealthController.DecreaseHealth();
             }
 
@@ -88,6 +89,14 @@ namespace Enemy
             {
                 Move(Vector2.down);
             }
+        }
+        /// <summary>
+        /// debug session
+        /// </summary>
+        public void ChangeColor()
+        {
+            _spriteRenderer.color = Color.green;
+            
         }
     }
 }

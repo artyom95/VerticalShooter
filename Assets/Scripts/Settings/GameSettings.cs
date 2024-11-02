@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Settings
 {
@@ -17,7 +18,7 @@ namespace Settings
         [field: SerializeField] public float EnemySpeed;
         [field: SerializeField] public float RadiusDetection;
         [field: SerializeField] public float NearDistanceToEnemy;
-
+        [field: SerializeField] public float BulletCoolDown;
         [field: SerializeField] public float SpawnTimer;
         [field: SerializeField] public int AmountEnemy;
         [field: SerializeField] public float EnemyHealth;

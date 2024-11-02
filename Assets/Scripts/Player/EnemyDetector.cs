@@ -59,7 +59,7 @@ namespace Player
         /// <param name="array"></param>
         private void GetNearestEnemies(Collider[] array)
         {
-             
+             _nearestEnemy.Clear();
             foreach (var collider2D in array)
             {
                 if (Vector3.Distance(_player.transform.position, collider2D.transform.position) <= _nearDistanceToEnemy)

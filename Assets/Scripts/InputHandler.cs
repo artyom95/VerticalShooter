@@ -4,9 +4,10 @@ using UnityEngine;
 public class InputHandler : MonoBehaviour
 {
     public event Action<Vector2> Move;
+    
     private bool _shouldListenInputButton;
 
-    public void Initialize()
+    public void StartListening()
     {
         _shouldListenInputButton = true;
     }

@@ -28,7 +28,8 @@ namespace Player
                 _direction = direction.normalized;
 
                 _player.RigidBody.AddForce(_direction * _speed, ForceMode.Impulse);
-
+                _player.RigidBody.angularVelocity = Vector3.zero;
+                
                 _moveTimer = 0;
             }
         }
@@ -39,7 +40,7 @@ namespace Player
             {
                 _moveTimer += Time.fixedDeltaTime;
 
-                if (_moveTimer >= _moveDuration)
+                if (_moveTimer >= _moveDuration && _player.RigidBody != null)
                 {
                     _isMoving = false;
                     _player.RigidBody.velocity = Vector2.zero;

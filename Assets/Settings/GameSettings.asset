@@ -20,6 +20,7 @@ MonoBehaviour:
   EnemySpeed: 0.5
   RadiusDetection: 4
   NearDistanceToEnemy: 3
+  BulletCoolDown: 1
   SpawnTimer: 4
   AmountEnemy: 10
   EnemyHealth: 2

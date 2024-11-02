@@ -41,7 +41,7 @@ namespace Player
         {
             CreatePlayer(_playerPrefab, _playerSpawnTransform);
             _player.Initialize(_enemyDetector, _gameSettings);
-            _inputHandler.Initialize();
+            _inputHandler.StartListening();
             _playerMover.Initialize(_player, _gameSettings);
             _attackExecutor.Initialize(_bulletPrefab, _player, _gameSettings);
             Subscribe();
