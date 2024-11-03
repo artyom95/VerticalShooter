@@ -10,19 +10,22 @@ namespace UI.Health
         private float _maxHealth;
         private HealthBar _healthBarPrefab;
         private HealthBarFactory _healthBarFactory;
+        private Transform _healthBarParent;
 
         public void Initialize(GameSettings gameSettings,
             HealthBar healthBarPrefab,
-            HealthBarFactory healthBarFactory)
+            HealthBarFactory healthBarFactory,
+            Transform healthBarParent)
         {
+            _healthBarParent = healthBarParent;
             _healthBarFactory = healthBarFactory;
             _healthBarPrefab = healthBarPrefab;
             _maxHealth = gameSettings.PlayerHealth;
         }
 
-        public void CreateHealthBar(Transform parent)
+        public void CreateHealthBar()
         {
-            _healthBar = _healthBarFactory.Create(_healthBarPrefab, parent);
+            _healthBar = _healthBarFactory.Create(_healthBarPrefab, _healthBarParent);
             _healthBar.Initialize(_maxHealth);
         }
 

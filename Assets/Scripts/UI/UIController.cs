@@ -63,8 +63,8 @@ namespace UI
 
         public void Initialize()
         {
-            _playerHealthBarView.Initialize(_gameSettings, _healthBarPrefab, _healthBarFactory);
-            _enemyHealthBarView.Initialize(_gameSettings, _healthBarPrefab, _healthBarFactory);
+            _playerHealthBarView.Initialize(_gameSettings, _healthBarPrefab, _healthBarFactory, _healthBarParent);
+            _enemyHealthBarView.Initialize(_gameSettings, _healthBarPrefab, _healthBarFactory, _healthBarParent);
             _enemyCounterView.ShowAmountEnemy(_gameSettings.AmountEnemy);
             _gameOverPanel.Initialize(_unSubscribeAction, _createControllers, _initializeGameAction,
                 _restartButtonGameOverPanel, _onRestartButtonPressed);
@@ -99,13 +99,13 @@ namespace UI
 
         public void OnPlayerSpawned(Player.Player player)
         {
-            _playerHealthBarView.CreateHealthBar(_healthBarParent);
+            _playerHealthBarView.CreateHealthBar();
             _playerHealthBarView.SetRoot(player);
         }
 
         public void OnEnemySpawned(Enemy.Enemy enemy)
         {
-            _enemyHealthBarView.CreateHealthBar(enemy, _healthBarParent);
+            _enemyHealthBarView.CreateHealthBar(enemy);
             _enemyHealthBarView.SetRoot(enemy);
         }
 

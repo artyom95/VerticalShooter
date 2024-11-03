@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Settings;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
-using Object = System.Object;
 using Random = UnityEngine.Random;
 
 namespace Enemy
 {
     public class EnemyController : IDisposable
-
     {
         public event Action<int> AmountEnemyChangedAction;
         public event Action AmountEnemyEndedAction;
@@ -54,46 +51,12 @@ namespace Enemy
             Subscribe();
         }
 
-        private void OnTake(Enemy enemy)
-        {
-            enemy.gameObject.SetActive(true);
-        }
-
-        private void OnDestroyAction(Enemy enemy)
-        {
-            enemy.ReleaseEnemyAction -= ReleaseEnemy;
-            enemy.Destroy();
-        }
-
-        private void OnRealise(Enemy enemy)
-        {
-            enemy.SetDefaultProperties();
-            var spawnPoint = GetSpawnPoint();
-            enemy.gameObject.transform.position = spawnPoint.position;
-            enemy.gameObject.SetActive(false);
-        }
-
-        private Enemy OnEnemyCreate()
-        {
-            var spawnPoint = GetSpawnPoint();
-            var enemy = _enemyFactory.Create(_enemyPrefab, spawnPoint);
-            enemy.ReleaseEnemyAction += ReleaseEnemy;
-            enemy.Initialize(_gameSettings, _enemyDestroyed,
-                _enemyCounter.DeleteEnemy, EnemyDied, OnHealthChanged);
-            return enemy;
-        }
-
-        private void ReleaseEnemy(Enemy enemy)
-        {
-            _enemyPool.Release(enemy);
-        }
-
         public void KillAliveEnemies()
         {
             KillAllEnemies?.Invoke();
             _enemyCounter.KillAllEnemies();
             _enemyPool.Clear();
-           UnSubscribe();
+            UnSubscribe();
         }
 
         public void UnSubscribe()
@@ -152,6 +115,40 @@ namespace Enemy
         private void OnHealthChanged(Enemy enemy, float health)
         {
             HealthChangedAction?.Invoke(enemy, health);
+        }
+
+        private void OnTake(Enemy enemy)
+        {
+            enemy.gameObject.SetActive(true);
+        }
+
+        private void OnDestroyAction(Enemy enemy)
+        {
+            enemy.ReleaseEnemyAction -= ReleaseEnemy;
+            enemy.Destroy();
+        }
+
+        private void OnRealise(Enemy enemy)
+        {
+            enemy.SetDefaultProperties();
+            var spawnPoint = GetSpawnPoint();
+            enemy.gameObject.transform.position = spawnPoint.position;
+            enemy.gameObject.SetActive(false);
+        }
+
+        private Enemy OnEnemyCreate()
+        {
+            var spawnPoint = GetSpawnPoint();
+            var enemy = _enemyFactory.Create(_enemyPrefab, spawnPoint);
+            enemy.ReleaseEnemyAction += ReleaseEnemy;
+            enemy.Initialize(_gameSettings, _enemyDestroyed,
+                _enemyCounter.DeleteEnemy, EnemyDied, OnHealthChanged);
+            return enemy;
+        }
+
+        private void ReleaseEnemy(Enemy enemy)
+        {
+            _enemyPool.Release(enemy);
         }
     }
 }

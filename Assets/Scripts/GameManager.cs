@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RestartButton _restartButtonGameOverPanel;
     [SerializeField] private RestartButton _restartButtonWinPanel;
     [SerializeField] private HealthBar _healthBarPrefab;
-    [SerializeField] private Transform _healthBardParent;
+    [SerializeField] private Transform _healthBarParent;
     [SerializeField] private PanelBehaviour _winPanel;
     [SerializeField] private PanelBehaviour _gameOverPanel;
 
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             _restartButtonWinPanel, _gameSettings,
             _winPanel, _gameOverPanel,
             _enemyCounterView, _healthBarPrefab,
-            _healthBardParent,
+            _healthBarParent,
             CreateControllers, InitializeGame,
             UnSubscribe, OnRestartButtonPressed);
 
