@@ -47,9 +47,9 @@ namespace Enemy
         {
             foreach (var enemy in _enemiesList)
             {
-                if (enemy != null)
+                if (enemy != null && enemy.gameObject.activeSelf)
                 {
-                    enemy.Destroy(enemy);
+                    enemy.ReleaseEnemy();
                 }
             }
         }

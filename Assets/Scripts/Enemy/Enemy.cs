@@ -11,10 +11,11 @@ namespace Enemy
 
     {
         public bool IsAlive { get; private set; }
+        public event Action<Enemy> ReleaseEnemyAction;
 
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        
+
         private Action<Enemy> _enemyDestroyedAction;
         private Action<Enemy> _deleteEnemyFromList;
         private Action<Enemy> _enemyDeathAction;
@@ -22,16 +23,22 @@ namespace Enemy
         private EnemyHealthController _enemyHealthController;
         private float _enemySpeed;
         private bool _startMoving;
+        private Color _defaultColor;
+        private GameSettings _gameSettings;
+        private Action<Enemy, float> _onHealthChangedAction;
 
         public void Start()
         {
             IsAlive = true;
+            _defaultColor = _spriteRenderer.color;
         }
 
         public void Initialize(GameSettings gameSettings, Action<Enemy> enemyDestroyedAction,
             Action<Enemy> deleteEnemyFromList, Action<Enemy> enemyDeathAction,
             Action<Enemy, float> onHealthChangedAction)
         {
+            _onHealthChangedAction = onHealthChangedAction;
+            _gameSettings = gameSettings;
             gameObject.transform.Rotate(0, 0, 180);
             _enemyDeathAction = enemyDeathAction;
             _deleteEnemyFromList = deleteEnemyFromList;
@@ -59,18 +66,21 @@ namespace Enemy
 
         public void KillEnemy()
         {
-            if (gameObject != null)
+            if (gameObject != null && gameObject.activeSelf)
             {
                 _deleteEnemyFromList?.Invoke(this);
                 _enemyDestroyedAction?.Invoke(this);
                 IsAlive = false;
-                Destroy(gameObject);
+                ReleaseEnemy();
             }
         }
 
-        public void Destroy(Enemy enemy)
+        public void SetDefaultProperties()
         {
-            Destroy(enemy.gameObject);
+            IsAlive = true;
+            _spriteRenderer.color = _defaultColor;
+            _enemyHealthController.Initialize(this, _gameSettings, KillEnemy, _onHealthChangedAction);
+
         }
 
         public void Move(Vector2 direction)
@@ -83,6 +93,15 @@ namespace Enemy
             _startMoving = true;
         }
 
+        public void ReleaseEnemy()
+        {
+            ReleaseEnemyAction?.Invoke(this);
+        }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
         private void Update()
         {
             if (_startMoving)
@@ -90,13 +109,13 @@ namespace Enemy
                 Move(Vector2.down);
             }
         }
+
         /// <summary>
         /// debug session
         /// </summary>
         public void ChangeColor()
         {
             _spriteRenderer.color = Color.green;
-            
         }
     }
 }

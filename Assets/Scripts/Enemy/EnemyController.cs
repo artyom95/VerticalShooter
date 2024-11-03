@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Settings;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
+using Object = System.Object;
 using Random = UnityEngine.Random;
 
 namespace Enemy
@@ -11,11 +14,11 @@ namespace Enemy
     {
         public event Action<int> AmountEnemyChangedAction;
         public event Action AmountEnemyEndedAction;
-        public event Action KillAllEnemies; 
+        public event Action KillAllEnemies;
         public event Action<Enemy> EnemySpawned;
         public event Action<Enemy> EnemyDied;
-        public event Action<Enemy,float> HealthChangedAction;
-        
+        public event Action<Enemy, float> HealthChangedAction;
+
         private readonly GameSettings _gameSettings;
         private readonly Enemy _enemyPrefab;
         private readonly EnemyFactory _enemyFactory;
@@ -23,7 +26,8 @@ namespace Enemy
         private readonly EnemySpawnTimer _enemySpawnTimer;
         private readonly EnemyCounter _enemyCounter;
         private Action<Enemy> _enemyDestroyed;
-        
+        private ObjectPool<Enemy> _enemyPool;
+
         private Enemy _enemy;
 
         public EnemyController(GameSettings gameSettings, Enemy enemyPrefab,
@@ -43,14 +47,53 @@ namespace Enemy
         {
             _enemySpawnTimer.Initialize(_gameSettings);
             _enemyDestroyed = enemyDestroyedAction;
+            _enemyPool = new ObjectPool<Enemy>(OnEnemyCreate, OnTake,
+                OnRealise, OnDestroyAction,
+                true, 5,
+                10);
             Subscribe();
+        }
+
+        private void OnTake(Enemy enemy)
+        {
+            enemy.gameObject.SetActive(true);
+        }
+
+        private void OnDestroyAction(Enemy enemy)
+        {
+            enemy.ReleaseEnemyAction -= ReleaseEnemy;
+            enemy.Destroy();
+        }
+
+        private void OnRealise(Enemy enemy)
+        {
+            enemy.SetDefaultProperties();
+            var spawnPoint = GetSpawnPoint();
+            enemy.gameObject.transform.position = spawnPoint.position;
+            enemy.gameObject.SetActive(false);
+        }
+
+        private Enemy OnEnemyCreate()
+        {
+            var spawnPoint = GetSpawnPoint();
+            var enemy = _enemyFactory.Create(_enemyPrefab, spawnPoint);
+            enemy.ReleaseEnemyAction += ReleaseEnemy;
+            enemy.Initialize(_gameSettings, _enemyDestroyed,
+                _enemyCounter.DeleteEnemy, EnemyDied, OnHealthChanged);
+            return enemy;
+        }
+
+        private void ReleaseEnemy(Enemy enemy)
+        {
+            _enemyPool.Release(enemy);
         }
 
         public void KillAliveEnemies()
         {
             KillAllEnemies?.Invoke();
             _enemyCounter.KillAllEnemies();
-            UnSubscribe();
+            _enemyPool.Clear();
+           UnSubscribe();
         }
 
         public void UnSubscribe()
@@ -73,11 +116,7 @@ namespace Enemy
 
         private void CreateEnemy()
         {
-            var spawnPoint = GetSpawnPoint();
-            _enemy = _enemyFactory.Create(_enemyPrefab, spawnPoint);
-            
-            _enemy.Initialize(_gameSettings, _enemyDestroyed, 
-                _enemyCounter.DeleteEnemy, EnemyDied, OnHealthChanged);
+            _enemy = _enemyPool.Get();
             _enemyCounter.AddEnemy(_enemy);
             _enemy.StartMove();
             EnemySpawned?.Invoke(_enemy);
@@ -91,7 +130,7 @@ namespace Enemy
 
         private Transform GetSpawnPoint()
         {
-            var indexTransform = Random.Range(0, 2);
+            var indexTransform = Random.Range(0, 3);
             return _spawnPoints[indexTransform];
         }
 
