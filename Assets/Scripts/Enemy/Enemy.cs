@@ -1,6 +1,6 @@
 using System;
 using Health.EnemyHealth;
-using Interface;
+using Interfaces;
 using Settings;
 using UnityEngine;
 
@@ -8,7 +8,6 @@ namespace Enemy
 {
     [RequireComponent(typeof(Rigidbody))]
     public class Enemy : MonoBehaviour, IMovable
-
     {
         public bool IsAlive { get; private set; }
         public event Action<Enemy> ReleaseEnemyAction;

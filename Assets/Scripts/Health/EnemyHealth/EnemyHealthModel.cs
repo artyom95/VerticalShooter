@@ -1,4 +1,4 @@
-using Interface;
+using Interfaces;
 
 namespace Health.EnemyHealth
 {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Interface
+namespace Interfaces
 {
     public interface IMovable
     {
