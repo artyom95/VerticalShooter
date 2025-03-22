@@ -108,10 +108,7 @@ namespace Enemy
                 Move(Vector2.down);
             }
         }
-
-        /// <summary>
-        /// debug session
-        /// </summary>
+    
         public void ChangeColor()
         {
             _spriteRenderer.color = Color.green;

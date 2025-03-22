@@ -9,18 +9,18 @@ namespace UI.StartScreen
         public event Action<float> SetRemainingTime;
         public event Action StopCountDown;
 
-        private float _countdownTime;
+        private float _countDownTime;
         private int _delay;
 
         public void Initialize(GameSettings gameSettings)
         {
-            _countdownTime = gameSettings.TimerSettings.CountdownTime;
+            _countDownTime = gameSettings.TimerSettings.CountdownTime;
             _delay = gameSettings.TimerSettings.Delay;
         }
 
         public async void BeginCountDown()
         {
-            var timeRemaining = _countdownTime;
+            var timeRemaining = _countDownTime;
 
             while (timeRemaining >= 0)
             {

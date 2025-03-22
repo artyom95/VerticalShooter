@@ -2447,7 +2447,7 @@ MonoBehaviour:
   _restartButtonGameOverPanel: {fileID: 1234047785}
   _restartButtonWinPanel: {fileID: 1222924664}
   _healthBarPrefab: {fileID: -7093991426613088697, guid: 4dc788ef81a13d743ac12bc11e267579, type: 3}
-  _healthBardParent: {fileID: 1922861515}
+  _healthBarParent: {fileID: 1922861515}
   _winPanel: {fileID: 1757968241}
   _gameOverPanel: {fileID: 1527539049}
 --- !u!4 &1474907253

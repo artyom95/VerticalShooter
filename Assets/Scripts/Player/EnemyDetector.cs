@@ -36,7 +36,7 @@ namespace Player
             }
         }
 
-        public void DeleteEnemyFromList(Enemy.Enemy enemy)
+        public void DeleteEnemyFromNearestEnemyList(Enemy.Enemy enemy)
         {
             if (_nearestEnemy.Count == 0 || !_nearestEnemy.Contains(enemy))
             {
@@ -53,10 +53,7 @@ namespace Player
             }
             _nearestEnemy = enemyList;
         }
-        /// <summary>
-        /// how to pull through  Physics2D.OverlapCircleAll method necessary script for me
-        /// </summary>
-        /// <param name="array"></param>
+       
         private void GetNearestEnemies(Collider[] array)
         {
              _nearestEnemy.Clear();

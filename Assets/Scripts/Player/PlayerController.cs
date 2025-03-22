@@ -20,7 +20,7 @@ namespace Player
         public PlayerController(InputHandler inputHandler,
             Player playerPrefab, Transform playerSpawnTransform,
             PlayerMover playerMover, GameSettings gameSettings,
-            Bullet bulletPrefab, AttackExecutor attackExecutor)
+           AttackExecutor attackExecutor)
         {
             _playerSpawnTransform = playerSpawnTransform;
             _playerPrefab = playerPrefab;
@@ -45,7 +45,7 @@ namespace Player
 
         public void OnEnemyPrefabDestroyed(Enemy.Enemy enemy)
         {
-            _enemyDetector.DeleteEnemyFromList(enemy);
+            _enemyDetector.DeleteEnemyFromNearestEnemyList(enemy);
         }
 
         public void KillPlayer()

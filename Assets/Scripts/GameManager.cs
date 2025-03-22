@@ -57,8 +57,7 @@ public class GameManager : MonoBehaviour
 
         _playerController = new PlayerController(_inputHandler, _playerPrefab,
             _playerSpawnTransform, _playerMover,
-            _gameSettings, _bulletPrefab,
-            _attackExecutor);
+            _gameSettings, _attackExecutor);
 
         _enemyController = new EnemyController(_gameSettings, _enemyPrefab,
             _enemySpawnPoints, _enemySpawnTimer);

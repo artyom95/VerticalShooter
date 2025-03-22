@@ -3,7 +3,6 @@ using Settings;
 
 namespace UI.StartScreen
 {
-   
     public class StartScreenController : IDisposable
     {
         private readonly StartScreenModel _startScreenModel;
@@ -23,17 +22,17 @@ namespace UI.StartScreen
             Initialize();
         }
 
+        public void Dispose()
+        {
+            UnSubscribe();
+        }
+
         private void Initialize()
         {
             Subscribe();
             _startButton.Initialize(_startScreenModel.BeginCountDown);
             _startScreenView.Initialize(_gameSettings);
             _startScreenModel.Initialize(_gameSettings);
-        }
-
-        public void Dispose()
-        {
-            UnSubscribe();
         }
 
         private void Subscribe()
