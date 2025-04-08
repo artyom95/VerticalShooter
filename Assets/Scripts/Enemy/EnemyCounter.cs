@@ -9,18 +9,18 @@ namespace Enemy
         private int _amountEnemy;
         private readonly List<Enemy> _enemiesList;
 
-        private readonly Action<int> _amountEnemyChanged;
-        private readonly Action _amountEnemyEndedAction;
-        private readonly Action _amountAliveEndedAction;
+        private readonly Action<int> _amountEnemiesChanged;
+        private readonly Action _amountEnemiesEndedAction;
+        private readonly Action _amountAliveEnemiesEndedAction;
 
         public EnemyCounter(GameSettings gameSettings,
-            Action<int> amountEnemyChangedAction,
-            Action amountEnemyEndedAction,
-            Action amountAliveEndedAction)
+            Action<int> amountEnemiesChangedAction,
+            Action amountEnemiesEndedAction,
+            Action amountAliveEnemiesEndedAction)
         {
-            _amountAliveEndedAction = amountAliveEndedAction;
-            _amountEnemyEndedAction = amountEnemyEndedAction;
-            _amountEnemyChanged = amountEnemyChangedAction;
+            _amountAliveEnemiesEndedAction = amountAliveEnemiesEndedAction;
+            _amountEnemiesEndedAction = amountEnemiesEndedAction;
+            _amountEnemiesChanged = amountEnemiesChangedAction;
             _amountEnemy = gameSettings.AmountEnemy;
             _enemiesList = new List<Enemy>();
         }
@@ -38,7 +38,7 @@ namespace Enemy
         public void DecreaseAmountEnemy()
         {
             _amountEnemy -= 1;
-            _amountEnemyChanged?.Invoke(_amountEnemy);
+            _amountEnemiesChanged?.Invoke(_amountEnemy);
 
             CheckAmountEnemy();
         }
@@ -58,7 +58,7 @@ namespace Enemy
         {
             if (_amountEnemy <= 0)
             {
-                _amountEnemyEndedAction?.Invoke();
+                _amountEnemiesEndedAction?.Invoke();
             }
         }
 
@@ -66,7 +66,7 @@ namespace Enemy
         {
             if (_enemiesList.Count == 0)
             {
-                _amountAliveEndedAction?.Invoke();
+                _amountAliveEnemiesEndedAction?.Invoke();
             }
         }
     }

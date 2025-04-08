@@ -62,7 +62,7 @@ namespace Enemy
         public void UnSubscribe()
         {
             _enemySpawnTimer.TimerFinishedEvent -= CreateEnemy;
-            _enemySpawnTimer.CheckAliveEnemies -= CheckAliveEnemies;
+            _enemySpawnTimer.CheckAliveEnemiesEvent -= CheckAliveEnemiesEvent;
             _enemySpawnTimer.StopTimer();
         }
 
@@ -74,7 +74,7 @@ namespace Enemy
         private void Subscribe()
         {
             _enemySpawnTimer.TimerFinishedEvent += CreateEnemy;
-            _enemySpawnTimer.CheckAliveEnemies += CheckAliveEnemies;
+            _enemySpawnTimer.CheckAliveEnemiesEvent += CheckAliveEnemiesEvent;
         }
 
         private void CreateEnemy()
@@ -86,7 +86,7 @@ namespace Enemy
             _enemyCounter.DecreaseAmountEnemy();
         }
 
-        private void CheckAliveEnemies()
+        private void CheckAliveEnemiesEvent()
         {
             _enemyCounter.CheckAmountAliveEnemies();
         }

@@ -9,9 +9,9 @@ namespace UI
     {
         [SerializeField] private TextMeshProUGUI _amountEnemy;
 
-        public void ShowAmountEnemy(int health)
+        public void ShowAmountEnemy(int amountEnemy)
         {
-            _amountEnemy.text = Convert.ToString(health);
+            _amountEnemy.text = Convert.ToString(amountEnemy);
         }
     }
 }

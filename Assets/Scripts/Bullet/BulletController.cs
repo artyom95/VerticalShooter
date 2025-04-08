@@ -26,7 +26,12 @@ public class BulletController
         _bulletFactory = new BulletFactory();
     }
 
-    public Bullet CreateBullet()
+    public void ShootBullet(Enemy.Enemy enemy)
+    {
+        var bullet = CreateBullet();
+        bullet.Move(enemy);
+    }
+    private Bullet CreateBullet()
     {
         var bullet = _bulletPool.Get();
         return bullet;

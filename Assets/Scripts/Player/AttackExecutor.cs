@@ -36,8 +36,8 @@ namespace Player
             if (enemy.IsAlive)
             {
                 enemy.ChangeColor();
-                var bullet = _bulletController.CreateBullet();
-                bullet.Move(enemy);
+                
+                _bulletController.ShootBullet(enemy);
                 _shootTimer = 0;
             }
         }

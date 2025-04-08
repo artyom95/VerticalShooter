@@ -8,7 +8,7 @@ namespace Enemy
 
     {
         public event Action TimerFinishedEvent;
-        public event Action CheckAliveEnemies;
+        public event Action CheckAliveEnemiesEvent;
 
         private float _spawnTimerValue;
         private float _currentTime;
@@ -21,11 +21,6 @@ namespace Enemy
             _spawnTimerValue = gameSettings.SpawnTimer;
             _currentTime = gameSettings.SpawnTimer;
         }
-
-        /// <summary>
-        /// should think about checking alive enemies
-        /// if to be more precise in with what period of time i have to start do it   
-        /// </summary>
         public void Update()
         {
             if (!_shouldStartTimer)
@@ -38,7 +33,7 @@ namespace Enemy
 
             if (_shouldStartCheckAliveEnemies)
             {
-                CheckAliveEnemies?.Invoke();
+                CheckAliveEnemiesEvent?.Invoke();
             }
         }
 
